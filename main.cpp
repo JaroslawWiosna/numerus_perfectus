@@ -164,5 +164,24 @@ void benchmark() {
 }
 
 int main() {
+    stoper_start();
+    auto v = std::vector<uint64_t>{};
+    for (uint64_t i = 1; i < 1000000; ++i) {
+        if (0 == i % 10000) {
+            std::cout << i << '\t';
+            for (const auto &item: v) {
+                std::cout << item << ", ";
+            }
+            std::cout << '\n';
+        }
+        if (2 * i == sigma4(i)) {
+            v.push_back(i);
+        }
+    }
+    for (const auto &item: v) {
+        std::cout << item << ", ";
+    }
+    std::cout << '\n';
+    stoper_stop();
     std::cout << "OK!\n";
 }
