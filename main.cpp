@@ -115,8 +115,7 @@ uint64_t sigma4(uint64_t x) {
     return result;
 }
 
-
-int main() {
+void benchmark() {
     for (const auto &x : factorish(34866)) {
         std::cout << x << ", ";
     }
@@ -162,6 +161,8 @@ int main() {
         }
     }
     stoper_stop();
+}
 
+int main() {
     std::cout << "OK!\n";
 }
