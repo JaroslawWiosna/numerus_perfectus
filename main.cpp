@@ -15,7 +15,8 @@ void stoper_stop() {
     std::cout << "Measured time: " << elapsed_seconds << " second(s)\n";
 }
 
-uint64_t sigma(uint64_t x) {
+// naive sigma function
+uint64_t sigma1(uint64_t x) {
     uint64_t acc = 0;
     for (uint64_t i = 1; i <= x; ++i) {
         if (0 == x % i) {
@@ -25,12 +26,35 @@ uint64_t sigma(uint64_t x) {
     return acc;
 }
 
+// optimised sigma
+// 
+uint64_t sigma2(uint64_t x) {
+    uint64_t acc = 0;
+    for (uint64_t i = 1; i <= x/2; ++i) {
+        if (0 == x % i) {
+            acc += i;
+        }
+    }
+    return acc + x;
+}
+
 int main() {
-    assert(12 == sigma(6));
+    assert(12 == sigma1(6));
+    assert(12 == sigma2(6));
     
+    std::cout << "sigma1\n";
     stoper_start();
-    for (uint64_t i = 5; i < 8200; ++i) {
-        if (2 * i == sigma(i)) {
+    for (uint64_t i = 1; i < 10000; ++i) {
+        if (2 * i == sigma1(i)) {
+            std::cout << i << '\n';
+        }
+    }
+    stoper_stop();
+
+     std::cout << "sigma2\n";
+    stoper_start();
+    for (uint64_t i = 1; i < 10000; ++i) {
+        if (2 * i == sigma2(i)) {
             std::cout << i << '\n';
         }
     }
